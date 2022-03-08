@@ -1,21 +1,38 @@
-<?php require_once dirname(__FILE__) .'/../config.php';?>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
 <head>
 <meta charset="utf-8" />
-<title>Kalkulator Kredytu</title>
+	<title>Kalkulator Kredytu</title>
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 </head>
 <body>
 
-<form action="<?php print(_APP_URL);?>/app/calc.php" method="post">
-	<label for="id_cost">Koszt całkowity: </label>
-	<input id="id_cost" type="text" name="cost" value="<?php print($cost); ?>" /><br />
-	<label for="id_year">Na ile lat: </label>
-	<input id="id_year" type="text" name="year" value="<?php print($year); ?>" /><br />
-	<label for="id_percent">Oprocentowanie: </label>
-	<input id="id_percent" type="text" name="percent" value="<?php print($percent); ?>" /><br />
-	<input type="submit" value="Oblicz" />
+<div style="width:90%;
+			margin: 2em auto;">
+	<a href="<?php print(_APP_ROOT); ?>/app/inna_chroniona_view.php" class="pure-button">kolejna chroniona strona</a>
+	<a href="<?php print(_APP_ROOT); ?>/app/security/logout.php" class="pure-button pure-button-active">Wyloguj</a>
+</div>
+
+<div style="width: 90%;
+			margin: 2em auto;">
+
+<form action="<?php print(_APP_URL);?>/app/calc.php" method="post" class="pure-form pure-form-stacked">
+	<legend>Kalkulator</legend>
+	<fieldset>
+		<label >Koszt całkowity:
+			<input type="text" name="cost" value="<?php print($cost); ?>" /><br />
+		</label>
+		<label>Na ile lat:
+			<input type="text" name="year" value="<?php print($year); ?>" /><br />
+		</label>
+		<label>Oprocentowanie:
+			<input type="text" name="percent" value="<?php print($percent); ?>" /><br />
+		</label>
+	</fieldset>
+	<input type="submit" value="Oblicz" class="pure-button pure-button-primary" />
 </form>	
+
+</div>
 
 <?php
 
