@@ -22,12 +22,12 @@ body{
 
 .messages {	margin: 1em auto; }
 
-.err, .inf, .res {
+.error, .info, .result {
 	padding: 1em 1em 1em 3em;
 	border-radius: 1em;
 	color: #222;
 }
 
-.err { background-color: #f88; }
-.inf { background-color: #8f8; }
-.res { background-color: #ff0; }
+.error { background-color: #f88; }
+.info { background-color: #8f8; }
+.result { background-color: #ff0; }

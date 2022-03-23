@@ -1,13 +1,13 @@
 <?php
-define('_SERVER_NAME', 'localhost:80');
-define('_SERVER_URL', 'http://'._SERVER_NAME);
-define('_APP_ROOT', '/kalkulator_kredytowy');
-define('_APP_URL', _SERVER_URL._APP_ROOT);
-define("_ROOT_PATH", dirname(__FILE__));
+require_once 'Config.class.php';
 
-function out(&$param){
-	if (isset($param)){
-		echo $param;
-	}
-}
+$config = new Config();
+
+$config->server_name = 'localhost:80';
+$config->server_url = 'http://'.$config->server_name;
+$config->app_root = '/kalkulator_kredytowy';
+$config->app_url = $config->server_url.$config->app_root;
+$config->root_path = dirname(__FILE__);
+$config->action_root = $config->app_root.'/app/ctrl.php?action=';
+$config->action_url = $config->server_url.$config->action_root;
 ?>
