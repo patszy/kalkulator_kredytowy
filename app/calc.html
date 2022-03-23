@@ -1,0 +1,57 @@
+{extends file="../templates/main.html"}
+
+{block name=footer}Domyślna treść stopki w szablonieu głównym.{/block}
+
+{block name=content}
+<form action="{$app_url}/app/calc.php" method="post" class="pure-form pure-form-stacked">
+	<legend>Kalkulator</legend>
+	<fieldset>
+		<label >Koszt całkowity:
+			<input type="text" name="cost" value="{$form['cost']}" /><br />
+		</label>
+		<label>Na ile lat:
+			<input type="text" name="year" value="{$form['year']}" /><br />
+		</label>
+		<label>Oprocentowanie:
+			<input type="text" name="percent" value="{$form['percent']}" /><br />
+		</label>
+	</fieldset>
+	<input type="submit" value="Oblicz" class="pure-button pure-button-primary" />
+</form>	
+
+</div>
+
+<div class="messages">
+	{if isset($messages)}
+		{if count($messages) > 0}
+			<h3>Wynikowe błędy: </h3>
+			<ol class="error">
+				{foreach $messages as $msg}
+				{strip}
+					<li>{$msg}</li>
+				{/strip}
+				{/foreach}
+			</ol>
+		{/if}
+	{/if}
+
+	{if isset($infos)}
+		{if count($infos)}
+			<h3>Etap: </h3>
+			<ol class="error">
+				{foreach $infos as $msg}
+				{strip}
+					<li>{$msg}</li>
+				{/strip}
+				{/foreach}
+			</ol>
+		{/if}
+	{/if}
+
+	{if isset($result)}
+		<h3>Wynik:</h3>
+		<p class="result">{$result}</p>
+	{/if}
+</div>
+
+{/block}
