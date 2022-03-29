@@ -1,4 +1,4 @@
-{extends file="main.html"}
+{extends file="main.tpl"}
 
 {block name=footer}Domyślna treść stopki w szablonieu głównym.{/block}
 
