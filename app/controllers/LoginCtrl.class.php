@@ -19,7 +19,7 @@ class LoginCtrl{
 	
 	public function validate() {
 		if (! (isset ( $this->form->login ) && isset ( $this->form->password ))) {
-			getMessages()->addError('Błędne wywołanie aplikacji!');
+			return false;
 		}
 			
 		if (! getMessages()->isError ()) {
@@ -38,15 +38,17 @@ class LoginCtrl{
 
 		if ( !getMessages()->isError() ) {
 			if ($this->form->login == "admin" && $this->form->password == "admin") {
-				if (session_status() == PHP_SESSION_NONE) session_start();
 				$user = new User($this->form->login, 'admin');
 
 				$_SESSION['user'] = serialize($user);				
+
+				addRole($user->role);
 			} else if ($this->form->login == "user" && $this->form->password == "user") {
-				if (session_status() == PHP_SESSION_NONE) session_start();
 				$user = new User($this->form->login, 'user');
 
 				$_SESSION['user'] = serialize($user);				
+				
+				addRole($user->role);
 			} else {
 				getMessages()->addError('Niepoprawne dane.');
                 getMessages()->addError('Weź nie kłam, dobra?');
@@ -56,7 +58,7 @@ class LoginCtrl{
 		return ! getMessages()->isError();
 	}
 	
-	public function doLogin(){
+	public function action_login(){
 		$this->getParams();
 		
 		if ($this->validate()){
@@ -66,8 +68,7 @@ class LoginCtrl{
 		}
 	}
 	
-	public function doLogout(){
-		if (session_status() == PHP_SESSION_NONE) session_start();
+	public function action_logout(){
 		session_destroy();
 		
 		getMessages()->addInfo('Ej, no weź się nie obrażaj.');

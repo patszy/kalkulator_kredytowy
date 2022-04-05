@@ -25,9 +25,9 @@
 
 {include file='messages.tpl'}
 
-{if isset($res->result)}
+{if isset($result->result)}
 <div class="messages info">
-	Wynik: {$res->result}
+	Wynik: {$result->result}
 </div>
 {/if}
 

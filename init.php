@@ -33,6 +33,15 @@ function &getLoader() {
     return $cloader;
 }
 
+require_once 'core/Router.class.php';
+$router = new core\Router();
+function &getRouter(): core\Router {
+    global $router; return $router;
+}
+
 require_once 'core/functions.php';
 
-$action = getFromRequest('action');
+session_start();
+$config->roles = isset($_SESSION['_roles']) ? unserialize($_SESSION['_roles']) : array();
+
+$router->setAction( getFromRequest('action') );

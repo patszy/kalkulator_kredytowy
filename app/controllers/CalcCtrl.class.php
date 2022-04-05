@@ -44,7 +44,7 @@ class CalcCtrl {
 		return ! getMessages()->isError();
 	}
 	
-	public function process(){
+	public function action_calcCompute(){
 
 		$this->getparams();
 		
@@ -54,23 +54,32 @@ class CalcCtrl {
 			$this->form->year = intval($this->form->year);
             $this->form->percent = intval($this->form->percent);
 			getMessages()->addInfo('Jest legitnie, zaczynam liczyć.');
-				
-			$this->result->result = ($this->form->cost+$this->form->cost*($this->form->percent*$this->form->year/100))/($this->form->year*12);
+			
+			if (inRole('admin')) {
+				$this->result->result=($this->form->cost+($this->form->cost*($this->form->percent/100)*$this->form->year))/($this->form->year*12);
+			} else {
+				getMessages()->addError('Tylko admin umie liczyć.');
+				getMessages()->addError('Idź poskarż się mamie.');
+			}
+			
 			getMessages()->addInfo('Się jusz zliczyło.');
 		}
 		
 		$this->generateView();
 	}
 
-	public function generateView(){
-		global $user;
+	public function action_calcShow() {
+		getMessages()->addInfo('Witaj w kalkulatorze.');
+		$this->generateView();
+	}
 
-		getSmarty()->assign('user',$user);
+	public function generateView(){
+		getSmarty()->assign('user',unserialize($_SESSION['user']));
 				
-		getSmarty()->assign('page_title','Kalkulator Kredytowy');
+		getSmarty()->assign('page_title','Super kalkulator - role');
 
 		getSmarty()->assign('form',$this->form);
-		getSmarty()->assign('res',$this->result);
+		getSmarty()->assign('result',$this->result);
 		
 		getSmarty()->display('CalcView.tpl');
 	}
