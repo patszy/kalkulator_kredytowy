@@ -61,16 +61,18 @@ class CalcCtrl {
 		
 		$this->generateView();
 	}
-	
+
 	public function generateView(){
+		global $user;
+
+		getSmarty()->assign('user',$user);
+				
 		getSmarty()->assign('page_title','Kalkulator Kredytowy');
-		getSmarty()->assign('page_description','Aplikacja z jednym "punktem wejścia". Zmiana w postaci nowej struktury foderów, skryptu inicjalizacji oraz pomocniczych funkcji.');
-		getSmarty()->assign('page_header','Kontroler główny');
-					
+
 		getSmarty()->assign('form',$this->form);
 		getSmarty()->assign('res',$this->result);
 		
-		getSmarty()->display('CalcView.tpl'); // już nie podajemy pełnej ścieżki - foldery widoków są zdefiniowane przy ładowaniu Smarty
+		getSmarty()->display('CalcView.tpl');
 	}
 }
 

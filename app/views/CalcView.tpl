@@ -1,8 +1,12 @@
 {extends file="main.tpl"}
 
-{block name=footer}Domyślna treść stopki w szablonieu głównym.{/block}
-
 {block name=content}
+
+<div class="pure-menu pure-menu-horizontal bottom-margin">
+	<a href="{$config->action_url}logout"  class="pure-menu-heading pure-menu-link">wyloguj</a>
+	<span style="float:right;">użytkownik: {$user->login}, rola: {$user->role}</span>
+</div>
+
 <form action="{$config->action_root}calcCompute" method="post" class="pure-form pure-form-stacked">
 	<legend>Kalkulator</legend>
 	<fieldset>
@@ -19,35 +23,12 @@
 	<input type="submit" value="Oblicz" class="pure-button pure-button-primary" />
 </form>	
 
+{include file='messages.tpl'}
+
+{if isset($res->result)}
+<div class="messages info">
+	Wynik: {$res->result}
 </div>
-
-<div class="messages">
-	{if $messages->isError()}
-		<h3>Wynikowe błędy: </h3>
-		<ol class="error">
-			{foreach $messages->getErrors() as $errors}
-			{strip}
-				<li>{$errors}</li>
-			{/strip}
-			{/foreach}
-		</ol>
-	{/if}
-
-	{if $messages->isInfo()}
-		<h3>Etap: </h3>
-		<ol class="info">
-			{foreach $messages->getInfos() as $info}
-			{strip}
-				<li>{$info}</li>
-			{/strip}
-			{/foreach}
-		</ol>
-	{/if}
-
-	{if isset($result->result)}
-		<h3>Wynik:</h3>
-		<p class="result">{$result->result}</p>
-	{/if}
-</div>
+{/if}
 
 {/block}
