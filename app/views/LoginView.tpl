@@ -1,6 +1,6 @@
 {extends file="main.tpl"}
 
-{block name=content}
+{block name=top}
 
 <form action="{$config->action_url}login" method="post"  class="pure-form pure-form-aligned bottom-margin">
 	<legend>Logowanie do systemu</legend>
@@ -20,7 +20,8 @@
 		</div>
 	</fieldset>
 </form>	
-
 {include file='messages.tpl'}
 
 {/block}
+
+

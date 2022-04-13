@@ -58,6 +58,10 @@ class LoginCtrl{
 		return ! getMessages()->isError();
 	}
 	
+	public function action_loginShow(){
+		$this->generateView(); 
+	}
+
 	public function action_login(){
 		$this->getParams();
 		

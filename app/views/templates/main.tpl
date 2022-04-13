@@ -1,14 +1,31 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+
 <head>
-	<meta charset="utf-8" />
-	<title>{$page_title|default:"brak tytułu"}</title>
-	<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="{$config->app_url}/css/style.css" />
+	<meta charset="utf-8"/>
+	<title>Aplikacja bazodanowa</title>
+	<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+		integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+	<link rel="stylesheet" href="{$config->app_url}/css/style.css">
 </head>
-<body>
-	<div style="margin: 1em;">
-		{block name=content} Domyślna treść zawartości .... {/block}
-	</div>
+
+<body style="margin: 20px;">
+
+<div class="pure-menu pure-menu-horizontal bottom-margin">
+	<a href="{$config->action_root}personList" class="pure-menu-heading pure-menu-link">Lista</a>
+{if count($config->roles)>0}
+	<a href="{$config->action_root}logout" class="pure-menu-heading pure-menu-link">Wyloguj</a>
+{else}	
+	<a href="{$config->action_root}loginShow" class="pure-menu-heading pure-menu-link">Zaloguj</a>
+{/if}
+</div>
+
+{block name=top} {/block}
+
+{block name=messages} {/block}
+
+{block name=bottom} {/block}
+
 </body>
+
 </html>

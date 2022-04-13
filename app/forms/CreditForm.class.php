@@ -1,8 +1,9 @@
 <?php
 namespace app\forms;
 
-class CalcForm {
-	public $cost;
+class CreditForm {
+	public $value;
 	public $year;
 	public $percent;
+	public $cost;
 } 
