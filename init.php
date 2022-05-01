@@ -1,67 +1,35 @@
 <?php
+
+/*
+ * Framework initialization
+ * - load config, messages, autoloader, router - prepare functions returning this global objects
+ * - prepare functions loading smarty, twig, database and autoloader on demand (only once)
+ * - load core functions, user roles from session and load action name to routing
+ *
+ *  * @author Przemysław Kudłacik
+ */
 require_once 'core/Config.class.php';
-$config = new core\Config();
-include 'config.php';
+require_once 'core/App.class.php';
 
-function &getConf(){ global $config; return $config; }
+use core\App;
+use core\Config;
 
-require_once 'core/Messages.class.php';
-$messages = new core\Messages();
+$_PARAMS = array(); #global array for parameters from clean URL
+$conf = new Config();
 
-function &getMessages(){ global $messages; return $messages; }
+# ---- Basic URL options - rather constant
+$conf->clean_urls = true;           # turn on pretty urls
+$conf->action_param = 'action';     # action parameter name (not needed for clean_urls)
+$conf->action_script = '/ctrl.php'; # front controller with location
 
-$smarty = null;	
-function &getSmarty(){
-	global $smarty;
-	if (!isset($smarty)){
-		include_once 'lib/smarty/Smarty.class.php';
-		$smarty = new Smarty();	
-		$smarty->assign('config',getConf());
-		$smarty->assign('messages',getMessages());
-		$smarty->setTemplateDir(array(
-			'one' => getConf()->root_path.'/app/views',
-			'two' => getConf()->root_path.'/app/views/templates'
-		));
-	}
-	return $smarty;
-}
+include 'config.php'; //set user configuration
 
-require_once 'core/ClassLoader.class.php';
-$cloader = new core\ClassLoader();
-function &getLoader() {
-    global $cloader;
-    return $cloader;
-}
+# ---- Helpful values generated automatically
+$conf->root_path = dirname(__FILE__);
+$conf->server_url = $conf->protocol.'://'.$conf->server_name;
+$conf->app_url = $conf->server_url.$conf->app_root.$conf->public_dir;
+if ($conf->clean_urls) $conf->action_root = $conf->app_root."/"; #for clean urls
+else $conf->action_root = $conf->app_root.'/index.php?'.$conf->action_param.'='; #for regular urls
+$conf->action_url = $conf->server_url.$conf->action_root;
 
-require_once 'core/Router.class.php';
-$router = new core\Router();
-function &getRouter(): core\Router {
-    global $router; return $router;
-}
-
-$db = null;
-function &getDB() {
-    global $config, $db;
-    if (!isset($db)) {
-        require_once 'lib/medoo/Medoo.php';
-        $db = new \Medoo\Medoo([
-            'database_type' => &$config->db_type,
-            'server' => &$config->db_server,
-            'database_name' => &$config->db_name,
-            'username' => &$config->db_user,
-            'password' => &$config->db_pass,
-            'charset' => &$config->db_charset,
-            'port' => &$config->db_port,
-            'prefix' => &$config->db_prefix,
-            'option' => &$config->db_option
-        ]);
-    }
-    return $db;
-}
-
-require_once 'core/functions.php';
-
-session_start();
-$config->roles = isset($_SESSION['_roles']) ? unserialize($_SESSION['_roles']) : array();
-
-$router->setAction( getFromRequest('action') );
+App::createAndInitialize($conf);

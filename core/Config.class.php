@@ -1,19 +1,19 @@
 <?php namespace core;
-
-class Config{
-	public $debug;
-	
+class Config extends \ArrayObject{
+	public $debug=false;
+	public $clean_urls=false;
 	public $root_path;
 	public $server_name;
+	public $protocol;
 	public $server_url;
 	public $app_root;
+	public $public_dir;
 	public $app_url; 
+	public $action_param;
+	public $action_script;
 	public $action_root;
 	public $action_url;
-
-	public $login_action;
 	public $roles;
-
 	public $db_type;
 	public $db_server;
 	public $db_port;
@@ -24,4 +24,3 @@ class Config{
 	public $db_prefix;
 	public $db_option;
 }
-?>

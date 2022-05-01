@@ -1,8 +1,7 @@
 {extends file="main.tpl"}
 
 {block name=top}
-
-<form action="{$config->action_url}login" method="post"  class="pure-form pure-form-aligned bottom-margin">
+<form action="{$conf->action_root}login" method="post" class="pure-form pure-form-aligned bottom-margin">
 	<legend>Logowanie do systemu</legend>
 	<fieldset>
         <div class="pure-control-group">
@@ -12,7 +11,7 @@
 		</div>
         <div class="pure-control-group">
 			<label>Password:
-				<input type="password" name="password" /><br />
+				<input type="password" name="pass" /><br />
 			</label>
 		</div>
 		<div class="pure-controls">
@@ -23,5 +22,3 @@
 {include file='messages.tpl'}
 
 {/block}
-
-

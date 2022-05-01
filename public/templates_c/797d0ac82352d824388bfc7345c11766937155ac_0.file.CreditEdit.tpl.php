@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-04-13 15:59:37
-  from '/Applications/XAMPP/xamppfiles/htdocs/kalkulator_kredytowy/app/views/CreditEdit.tpl' */
+/* Smarty version 4.1.0, created on 2022-05-01 14:04:27
+  from '/Applications/XAMPP/xamppfiles/htdocs/php_09_bd/app/views/CreditEdit.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_6256d74974e072_91853504',
+  'unifunc' => 'content_626e774be3d907_86137873',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '02aca542e80d747b7fd96b7b16f24151e8375b8f' => 
+    '797d0ac82352d824388bfc7345c11766937155ac' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/kalkulator_kredytowy/app/views/CreditEdit.tpl',
-      1 => 1649858376,
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/php_09_bd/app/views/CreditEdit.tpl',
+      1 => 1651406666,
       2 => 'file',
     ),
   ),
@@ -21,25 +21,25 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:messages.tpl' => 1,
   ),
 ),false)) {
-function content_6256d74974e072_91853504 (Smarty_Internal_Template $_smarty_tpl) {
+function content_626e774be3d907_86137873 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_18569027706256d74973d880_27979355', 'top');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_387510985626e774be37261_20633915', 'top');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main.tpl");
 }
 /* {block 'top'} */
-class Block_18569027706256d74973d880_27979355 extends Smarty_Internal_Block
+class Block_387510985626e774be37261_20633915 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'top' => 
   array (
-    0 => 'Block_18569027706256d74973d880_27979355',
+    0 => 'Block_387510985626e774be37261_20633915',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -47,10 +47,10 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 
 <div class="bottom-margin">
-<form action="<?php echo $_smarty_tpl->tpl_vars['config']->value->action_root;?>
+<form action="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
 creditSave" method="post" class="pure-form pure-form-aligned">
 	<fieldset>
-		<legend>Dane osoby</legend>
+		<legend>Dane kredytu</legend>
 		<div class="pure-control-group">
             <label for="value">Wartość</label>
             <input id="value" type="text" placeholder="Wartość" name="value" value="<?php echo $_smarty_tpl->tpl_vars['form']->value->value;?>
@@ -68,7 +68,7 @@ creditSave" method="post" class="pure-form pure-form-aligned">
         </div>
 		<div class="pure-controls">
 			<input type="submit" class="pure-button pure-button-primary" value="Zapisz"/>
-			<a class="pure-button button-secondary" href="<?php echo $_smarty_tpl->tpl_vars['config']->value->action_root;?>
+			<a class="pure-button button-secondary" href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
 creditList">Powrót</a>
 		</div>
 	</fieldset>
@@ -76,7 +76,6 @@ creditList">Powrót</a>
 ">
 </form>	
 </div>
-
 <?php $_smarty_tpl->_subTemplateRender('file:messages.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 

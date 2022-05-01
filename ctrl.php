@@ -1,25 +1,11 @@
 <?php
 require_once 'init.php';
 
-// getRouter()->setDefaultRoute('calcShow');
-// getRouter()->setLoginRoute('login');
+// Projekt 8 zrealizowany we frameworku Amelia
+// - brak zmian funkcjonalności
 
-// getRouter()->addRoute('calcShow',    'CalcCtrl',  ['user','admin']);
-// getRouter()->addRoute('calcCompute', 'CalcCtrl',  ['user','admin']);
-// getRouter()->addRoute('login',       'LoginCtrl');
-// getRouter()->addRoute('logout',      'LoginCtrl', ['user','admin']);
+require_once 'routing.php';
 
-getRouter()->setDefaultRoute('creditList');
-getRouter()->setLoginRoute('login');
+\core\SessionUtils::loadMessages();
 
-getRouter()->addRoute('creditList',		'CreditListCtrl');
-getRouter()->addRoute('loginShow',		'LoginCtrl');
-getRouter()->addRoute('login',			'LoginCtrl');
-getRouter()->addRoute('logout',			'LoginCtrl');
-getRouter()->addRoute('creditNew',		'CreditEditCtrl',	['user','admin']);
-getRouter()->addRoute('creditEdit',		'CreditEditCtrl',	['user','admin']);
-getRouter()->addRoute('creditSave',		'CreditEditCtrl',	['user','admin']);
-getRouter()->addRoute('creditDelete',	'CreditEditCtrl',	['admin']);
-
-getRouter()->go();
-?>
+\core\App::getRouter()->go();

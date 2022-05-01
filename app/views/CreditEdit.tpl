@@ -3,9 +3,9 @@
 {block name=top}
 
 <div class="bottom-margin">
-<form action="{$config->action_root}creditSave" method="post" class="pure-form pure-form-aligned">
+<form action="{$conf->action_root}creditSave" method="post" class="pure-form pure-form-aligned">
 	<fieldset>
-		<legend>Dane osoby</legend>
+		<legend>Dane kredytu</legend>
 		<div class="pure-control-group">
             <label for="value">Wartość</label>
             <input id="value" type="text" placeholder="Wartość" name="value" value="{$form->value}">
@@ -20,13 +20,12 @@
         </div>
 		<div class="pure-controls">
 			<input type="submit" class="pure-button pure-button-primary" value="Zapisz"/>
-			<a class="pure-button button-secondary" href="{$config->action_root}creditList">Powrót</a>
+			<a class="pure-button button-secondary" href="{$conf->action_root}creditList">Powrót</a>
 		</div>
 	</fieldset>
     <input type="hidden" name="id" value="{$form->id}">
 </form>	
 </div>
-
 {include file='messages.tpl'}
 
 {/block}

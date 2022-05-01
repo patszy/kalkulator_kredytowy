@@ -4,7 +4,6 @@ class Route{
 	public $controller = null;
 	public $method = null;
 	public $roles = null;
-    
 	public function __construct($namespace,$controller,$method,$roles){
 		$this->namespace = $namespace;
 		$this->controller = $controller;

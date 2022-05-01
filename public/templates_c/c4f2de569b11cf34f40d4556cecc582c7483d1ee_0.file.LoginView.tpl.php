@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-04-13 11:43:07
-  from '/Applications/XAMPP/xamppfiles/htdocs/kalkulator_kredytowy/app/views/LoginView.tpl' */
+/* Smarty version 4.1.0, created on 2022-05-01 14:03:16
+  from '/Applications/XAMPP/xamppfiles/htdocs/php_09_bd/app/views/LoginView.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_62569b2b6dd943_07953542',
+  'unifunc' => 'content_626e7704d517d8_68900020',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '3b52b5629b226a155bd10f47c7c12e8eea370c0e' => 
+    'c4f2de569b11cf34f40d4556cecc582c7483d1ee' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/kalkulator_kredytowy/app/views/LoginView.tpl',
-      1 => 1649842977,
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/php_09_bd/app/views/LoginView.tpl',
+      1 => 1651405653,
       2 => 'file',
     ),
   ),
@@ -21,35 +21,32 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:messages.tpl' => 1,
   ),
 ),false)) {
-function content_62569b2b6dd943_07953542 (Smarty_Internal_Template $_smarty_tpl) {
+function content_626e7704d517d8_68900020 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_22365066662569b2b6d8b44_87762336', 'top');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_506911448626e7704d48375_34199553', 'top');
 ?>
-
-
 
 <?php $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main.tpl");
 }
 /* {block 'top'} */
-class Block_22365066662569b2b6d8b44_87762336 extends Smarty_Internal_Block
+class Block_506911448626e7704d48375_34199553 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'top' => 
   array (
-    0 => 'Block_22365066662569b2b6d8b44_87762336',
+    0 => 'Block_506911448626e7704d48375_34199553',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
-
-<form action="<?php echo $_smarty_tpl->tpl_vars['config']->value->action_url;?>
-login" method="post"  class="pure-form pure-form-aligned bottom-margin">
+<form action="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
+login" method="post" class="pure-form pure-form-aligned bottom-margin">
 	<legend>Logowanie do systemu</legend>
 	<fieldset>
         <div class="pure-control-group">
@@ -59,7 +56,7 @@ login" method="post"  class="pure-form pure-form-aligned bottom-margin">
 		</div>
         <div class="pure-control-group">
 			<label>Password:
-				<input type="password" name="password" /><br />
+				<input type="password" name="pass" /><br />
 			</label>
 		</div>
 		<div class="pure-controls">

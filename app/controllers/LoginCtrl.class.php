@@ -2,88 +2,79 @@
 
 namespace app\controllers;
 
-use app\transfer\User;
+use core\App;
+use core\Utils;
+use core\RoleUtils;
+use core\ParamUtils;
 use app\forms\LoginForm;
 
-class LoginCtrl{
-	private $form;
-	
-	public function __construct(){
-		$this->form = new LoginForm();
-	}
-	
-	public function getParams(){
-		$this->form->login = getFromRequest('login');
-		$this->form->password = getFromRequest('password');
-	}
-	
-	public function validate() {
-		if (! (isset ( $this->form->login ) && isset ( $this->form->password ))) {
-			return false;
-		}
-			
-		if (! getMessages()->isError ()) {
-			if ($this->form->login == "") {
-				getMessages()->addError ( 'Ale... że jak się nazywasz?' );
-                getMessages()->addError ( 'No bo raczej nie tak jak wpisałeś.' );
-			}
-			if ($this->form->password == "") {
-				getMessages()->addError ( 'Złe hasło.' );
-                getMessages()->addError ( 'Podaj co najmniej jedną literę.' );
-                getMessages()->addError ( 'Dorzuć złę ostatniej Dziewicy.' );
-                getMessages()->addError ( 'Zamieszaj z piórem Archanioła.' );
-                getMessages()->addError ( 'Posyp sproszkowanym pazurem Draculi.' );
-            }
-		}
+class LoginCtrl {
 
-		if ( !getMessages()->isError() ) {
-			if ($this->form->login == "admin" && $this->form->password == "admin") {
-				$user = new User($this->form->login, 'admin');
+    private $form;
 
-				$_SESSION['user'] = serialize($user);				
+    public function __construct() {
+        //stworzenie potrzebnych obiektów
+        $this->form = new LoginForm();
+    }
 
-				addRole($user->role);
-			} else if ($this->form->login == "user" && $this->form->password == "user") {
-				$user = new User($this->form->login, 'user');
+    public function validate() {
+        $this->form->login = ParamUtils::getFromRequest('login');
+        $this->form->pass = ParamUtils::getFromRequest('pass');
 
-				$_SESSION['user'] = serialize($user);				
-				
-				addRole($user->role);
-			} else {
-				getMessages()->addError('Niepoprawne dane.');
-                getMessages()->addError('Weź nie kłam, dobra?');
-			}
-		}
-		
-		return ! getMessages()->isError();
-	}
-	
-	public function action_loginShow(){
-		$this->generateView(); 
-	}
+        //nie ma sensu walidować dalej, gdy brak parametrów
+        if (!isset($this->form->login))
+            return false;
 
-	public function action_login(){
-		$this->getParams();
-		
-		if ($this->validate()){
-			header("Location: ".getConf()->app_url."/");
-		} else {
-			$this->generateView(); 
-		}
-	}
-	
-	public function action_logout(){
-		session_destroy();
-		
-		getMessages()->addInfo('Ej, no weź się nie obrażaj.');
-        getMessages()->addInfo('Wróć do nas.');
+        // sprawdzenie, czy potrzebne wartości zostały przekazane
+        if (empty($this->form->login)) {
+            Utils::addErrorMessage('Nie podano loginu');
+        }
+        if (empty($this->form->pass)) {
+            Utils::addErrorMessage('Nie podano hasła');
+        }
 
-		$this->generateView();		 
-	}
-	
-	public function generateView(){
-		getSmarty()->assign('page_title', 'Logowanko');
-		getSmarty()->assign('form', $this->form);
-		getSmarty()->display('LoginView.tpl');		
-	}
+        //nie ma sensu walidować dalej, gdy brak wartości
+        if (App::getMessages()->isError())
+            return false;
+
+        // sprawdzenie, czy dane logowania poprawne
+        // (takie informacje najczęściej przechowuje się w bazie danych)
+        if ($this->form->login == "admin" && $this->form->pass == "admin") {
+            RoleUtils::addRole('admin');
+        } else if ($this->form->login == "user" && $this->form->pass == "user") {
+            RoleUtils::addRole('user');
+        } else {
+            Utils::addErrorMessage('Niepoprawny login lub hasło');
+        }
+
+        return !App::getMessages()->isError();
+    }
+
+    public function action_loginShow() {
+        $this->generateView();
+    }
+
+    public function action_login() {
+        if ($this->validate()) {
+            //zalogowany => przekieruj na główną akcję (z przekazaniem messages przez sesję)
+            Utils::addErrorMessage('Poprawnie zalogowano do systemu');
+            App::getRouter()->redirectTo("creditList");
+        } else {
+            //niezalogowany => pozostań na stronie logowania
+            $this->generateView();
+        }
+    }
+
+    public function action_logout() {
+        // 1. zakończenie sesji
+        session_destroy();
+        // 2. idź na stronę główną - system automatycznie przekieruje do strony logowania
+        App::getRouter()->redirectTo('creditList');
+    }
+
+    public function generateView() {
+        App::getSmarty()->assign('form', $this->form); // dane formularza do widoku
+        App::getSmarty()->display('LoginView.tpl');
+    }
+
 }
