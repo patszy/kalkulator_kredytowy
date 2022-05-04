@@ -20,7 +20,7 @@ class CreditListCtrl {
     public function validate() {
         // 1. sprawdzenie, czy parametry zostały przekazane
         // - nie trzeba sprawdzać
-        $this->form->surname = ParamUtils::getFromRequest('sf_value');
+        $this->form->value = ParamUtils::getFromRequest('sf_value');
 
         // 2. sprawdzenie poprawności przekazanych parametrów
         // - nie trzeba sprawdzać
